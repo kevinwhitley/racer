@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Racer</title>
+  
+  <script src="/cl/jslib/json2.js"></script>
+  <script src="/cl/jslib/jq/jquery-1.9.1.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+  
+  
+<script>
+$(document).ready(function(){
+});
+
+</script>
+
+<style>
+body, div, p, span, ul, li {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    background-color: #ccc;
+}
+
+.playerReady {
+    background-color: green;
+}
+.playerWaiting {
+    background-color: red;
+}
+
+#header {
+    width: 100%;
+    background-color: #dd8;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#content {
+    margin: 10px 0;
+    height: 300px;
+    position: relative;
+}
+
+#history {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 300px;
+    background-color: #eee;
+    overflow-y: auto;
+}
+
+#track {
+    position: absolute;
+    left: 310px;
+    top: 5px;
+    width: 600px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: #ccc;
+}
+
+#playerList {
+    position: absolute;
+    left: 920px;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    background-color: #eee;
+}
+.playerOnTrack {
+    position: absolute;
+}
+.playerToken {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+}
+
+#rollit {
+    position: absolute;
+    padding: 3px;
+    left: 310px;
+    top: 220px;
+    height: 40px;
+    width: 600px;
+    background-color: #afc;
+}
+
+#footer {
+    width: 100%;
+    background-color: #dd8;
+    height: 20px;
+}
+
+</style>
+
+</head>
+<body>
+
+  <!-- the application template -->
+  <script type="text/x-handlebars" data-template-name="application">
+    <div id="header">Racecars</div>
+    <div id="content">
+    {{outlet}}
+    </div>
+    <div id="footer">
+    {{#linkTo "about"}}About Racecar{{/linkTo}} <button {{action "reset"}}>Reset</button>
+    </div>
+  </script>
+  
+  <!-- template for the index route -->
+  <script type="text/x-handlebars" data-template-name="index">
+  <div>Start a race</div>
+  <div>
+  {{#if viewingPlayer}}
+    {{viewingPlayer.name}}
+    {{#if viewingPlayer.ready}}
+      <span class="playerReady">ready</span>
+    {{else}}
+      <button {{action "makeReady"}}>Go!</button>
+    {{/if}}
+  {{else}}
+    {{view Ember.TextField valueBinding="playerName"}}  <button {{action "setName"}}>Set</button>
+  {{/if}}
+  </div>
+  <div>
+    {{#each pl in otherPlayers}}
+      <div>
+      {{pl.name}}
+      {{#if pl.ready}}
+        <span class="playerReady">ready</span>
+      {{else}}
+        <span class="playerWaiting">waiting</span>
+      {{/if}}
+      </div>
+    {{/each}}
+  </div>
+  </script>
+  
+  <!-- template for the index route -->
+  <script type="text/x-handlebars" data-template-name="race">
+    <div id="history">{{render "gameHistory" this}}</div>
+    <div id="track">{{name}} You are {{viewingPlayer.name}} {{render "track" players}}</div>
+    <div id="playerList"> {{render "playerList" players}}</div>
+    <div id="rollit">{{render "rollit" this}}</div>
+  </script>
+
+  <!-- template for the about route -->
+  <script type="text/x-handlebars" data-template-name="about">
+    <div>
+        about
+    </div>
+  </script>
+
+  <!-- template for history -->
+  <script type="text/x-handlebars" data-template-name="gameHistory">
+      {{#each hi in history}}
+          <div>{{hi.type}} for {{hi.playerName}}</div>
+      {{/each}}
+  </script>
+  
+  <!-- template for the track component -->
+  <script type="text/x-handlebars" data-template-name="track">
+    {{#each pl in this}}
+      {{render "playerOnTrack" pl}}
+    {{/each}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="playerOnTrack">
+      <div class="playerOnTrack" {{bindAttr style="tokenStyle"}}>{{render "playerToken" this}}</div>
+  </script>
+
+  <!-- template for the playerList component -->
+  <script type="text/x-handlebars" data-template-name="playerList">
+    <h3>Players for:</h3>
+    {{#each pl in this}}
+      <div>{{pl.name}} {{render "playerToken" pl}}</div>
+    {{/each}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="playerToken">
+    <div class="playerToken" {{bindAttr style="displayStyle"}}></div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="rollit">
+    {{#if myTurn}}
+        Your turn: <button class="rollButton" {{action "roll"}}>Roll</button>
+    {{else}}
+        {{whoseTurn.name}}'s turn
+    {{/if}}
+  </script>
+  
+  <script src="/cl/jslib/ember/handlebars-1.0.0-rc.4.js"></script>
+  <script src="/cl/jslib/ember/ember-1.0.0-rc.4.js"></script>
+  <script src="/racer/racer.js"></script>
+
+</body>
+</html>
