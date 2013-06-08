@@ -1,0 +1,147 @@
+<html>
+<head>
+    <title>Silverton</title>
+    <meta name="viewport" content ="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <link href="/cl/csslib/ipad.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/cl/jslib/jq/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/cl/jslib/kw_jq.js"></script>
+    <script type="text/javascript" src="/cl/jslib/ipadutil.js"></script>
+    <script type="text/javascript" src="/cl/jslib/domdraw.js"></script>
+    <script type="text/javascript" src="/cl/jslib/silverton.js"></script>
+    <script type="text/javascript">
+        function loader()
+        {
+            ipad_updateOrientation();
+            document.sv = new Silverton();
+            document.sv.draw();
+
+            //window.onbeforeunload = function() {return "You will lose the state of the game";};
+        }
+
+
+    </script>
+    <style type="text/css">
+        body {
+            background-color: #333;
+        }
+        #bigdiv {
+            background-color:#eee;
+        }
+        #littlediv {
+            background-color: #777;
+        }
+
+        .priceDisplay {
+            background-color: #aed;
+            padding:0px;
+            border:1px solid black;
+        }
+        .priceDisplayWrapper {
+            background-color: #ccc;
+            padding:4px;
+            width:120px;
+        }
+        .priceDisplayHighlight {
+            background-color: red;
+        }
+        .headerDiv {
+            font-size: 20px;
+            text-align: center;
+            background-color:#aaa;
+            border-bottom:1px solid black;
+            width:100%;
+            height:24px;
+        }
+        .labelDiv {
+            padding:2px 1px;
+        }
+        .valueDiv {
+            padding:2px 3px;
+        }
+        .history {
+            border-top:1px solid black;
+            width:100%;
+            height:70px;
+            overflow:auto;
+            padding-top:4px;
+        }
+        .sale {
+            font-size: 14px;
+            padding-left: 4px;
+            line-height: 17px;
+        }
+
+        .entryButton {
+            float:left;
+            width:108px;
+            height:30px;
+            font-size: 18px;
+            line-height:28px;
+            margin:6px;
+        }
+        #turnEndB {
+            position:absolute;
+            width:100px;
+            height:30px;
+            left:470px;
+            top:448px;
+            line-height:28px;
+        }
+        #configureB {
+            position:absolute;
+            width:100px;
+            height:30px;
+            left:470px;
+            top:500px;
+            line-height:28px;
+        }
+        .setB {
+            width:60px;
+            height:24px;
+            line-height:28px;
+        }
+        .saleEntry {
+            padding:2px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #setTurn {
+            position:absolute;
+            left:470px;
+            top:540px;
+            display:none;
+        }
+
+    </style>
+</head>
+<body onorientationchange="ipad_updateOrientation();" onload="loader();">
+<div id="bigdiv">
+    <div style="position:absolute;left:620px;top:448px;width:55px;height:30px">
+        Turn:
+        <div id="turnCounter" style="position:absolute;right:0px;top:0px;">
+            1
+        </div>
+    </div>
+
+    <table id="setTurn">
+        <tr>
+            <td>Turn:</td>
+            <td><input id="turnConfigure" value="1" style="width:40px"/></td>
+            <td id="setTurnFrame"></td>
+        </tr>
+        <tr>
+            <td>Index:</td>
+            <td><input id="indexConfigure" value="1" style="width:40px"/></td>
+            <td id="setIndexFrame"></td>
+        </tr>
+    </table>
+
+</div>
+<div id="littlediv">
+    <div id="entryCalc" style="position:relative;width:100%;height:100%;display:none">
+
+    </div>
+</div>
+</body>
+</html>

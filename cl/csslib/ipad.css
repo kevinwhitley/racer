@@ -1,0 +1,87 @@
+body {
+}
+body[orient="landscape"] {
+}
+body[orient="portrait"] {
+}
+#bigdiv {
+    position:absolute;
+    left:5px;
+    top:5px;
+    width:758px;
+    height:680px;
+}
+#littlediv {
+    position:absolute;
+}
+body[orient="landscape"] #littlediv {
+    left:768px;
+    top:5px;
+    width:252px;
+    height:680px;
+}
+body[orient="portrait"] #littlediv {
+    left:5px;
+    top:690px;
+    width:758px;
+    height:250px;
+}
+.ldivbox {
+    float:left;
+    width:110px;
+    height:108px;
+    margin:2px;
+    padding: 0px;
+}
+
+/* div button */
+.dbutton {
+    background-color:#ddd;
+    text-align:center;
+    border:1px solid black;
+    color: black;
+}
+.dbuttonHilite {
+    background-color:#333;
+    color:white;
+}
+
+/* modal dialog */
+.modalBackdrop {
+    position:absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    display:none;
+    background-color:#666;
+    opacity:0.96;
+    z-index: 9000;
+}
+.modalDialog {
+    position:absolute;
+    left:100px;
+    top:100px;
+    width:350px;
+    height:100px;
+    background-color:#fff;
+    opacity:1.0;
+    border: 1px solid black;
+}
+.modalMessage {
+    text-align:center;
+    font-size:18px;
+    margin-top:4px;
+}
+.modalButtonBar {
+    position:absolute;
+    bottom:4px;
+    right:4px;
+    height:34px;
+}
+.modalButton {
+    height: 30px;
+    font-size: 18px;
+    margin-left:5px;
+    display:none;
+}

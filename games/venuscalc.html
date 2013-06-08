@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Venus Calc</title>
+    <meta name="viewport" content ="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <link href="/cl/csslib/ipad.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/cl/jslib/jq/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/cl/jslib/kw_jq.js"></script>
+    <script type="text/javascript" src="/cl/jslib/ipadutil.js"></script>
+    <script type="text/javascript" src="/cl/jslib/domdraw.js"></script>
+    <script type="text/javascript" src="/cl/jslib/venuscalc.js"></script>
+    <script type="text/javascript">
+        function loader()
+        {
+            ipad_updateOrientation();
+            document.vc = new VenusCalc('number');
+            document.vc.draw();
+            document.vc.display();
+        }
+
+
+    </script>
+    <style type="text/css">
+        body {
+            background-color: #333;
+        }
+        #bigdiv {
+            background-color:#eee;
+        }
+        #littlediv {
+            background-color: #777;
+        }
+
+        .dbutton {
+            font-size: 20px;
+            line-height: 44px;
+            font-family: Verdana, sans-serif;
+        }
+        .standardSelect {
+            font-size:18px;
+            width:100%;
+            height:100%;
+        }
+        .accountEntry {
+            padding:2px;
+            font-size: 14px;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body onorientationchange="ipad_updateOrientation();" onload="loader();">
+<div id="bigdiv">
+
+</div>
+<div id="littlediv">
+</div>
+</body>
+</html>
