@@ -12,7 +12,8 @@ function ipad_isIpad()
 }
 
 // touch event name
-var IpadTouchEvent = ipad_isIpad() ? 'touchstart' : 'mousedown';
+//var IpadTouchEvent = ipad_isIpad() ? 'touchstart' : 'mousedown';
+var IpadTouchEvent = 'mousedown';
 
 
 function ipad_touchDButton(event, buttonId)
@@ -34,6 +35,8 @@ function ipad_makeDButton(id, label, action)
     jbuttn.bind(IpadTouchEvent, function(event) {return ipad_touchDButton(event, buttonId);});
     if (action) {
         jbuttn.bind(IpadTouchEvent, action);
+        //jbuttn.on(IpadTouchEvent, action);
+        //console.log('have action');
     }
 
     return button;
